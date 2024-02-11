@@ -35,6 +35,8 @@ const FiltersContext = createContext<FiltersContextProps>({
   setSprints: () => {},
 });
 
+
+
 export const FiltersProvider = ({ children }: { children: ReactNode }) => {
   const [assignees, setAssignees] = useState<UserResource["id"][]>([]);
   const [search, setSearch] = useState<string>("");

@@ -6,6 +6,7 @@ type AuthModalContextProps = {
   setAuthModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+
 const AuthModalContext = createContext<AuthModalContextProps>({
   authModalIsOpen: false,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
