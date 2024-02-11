@@ -1,28 +1,29 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 export default function Tasks({ tasks, setTasks, setTaskDurations }) {
-
   const inputRef = useRef([]);
   const indexRef = useRef(null);
-  
+
   function handleDelete(e) {
-    const idNum = parseInt(e.target.getAttribute('data-task-id'));
+    const idNum = parseInt(e.target.getAttribute("data-task-id"));
     const newTasks = tasks.filter((task) => task.id !== idNum);
     // update state (if data on backend - make API request to update data)
     setTasks(newTasks);
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
 
     setTaskDurations((prevState) => {
       // delete any taskDurations associated with the task
       const newTaskDurations = prevState.filter(
         (taskDuration) => taskDuration.task !== idNum
       );
+      localStorage.setItem("taskDurations", JSON.stringify(newTaskDurations));
       return newTaskDurations;
     });
   }
 
   function onChange(e, i) {
     const { value } = e.target;
-    const idNum = parseInt(e.target.getAttribute('data-task-id'));
+    const idNum = parseInt(e.target.getAttribute("data-task-id"));
 
     let newTasks = tasks.filter((task) => task.id !== idNum);
     newTasks.push({ id: idNum, name: value });
@@ -44,14 +45,19 @@ export default function Tasks({ tasks, setTasks, setTaskDurations }) {
       <div className="gantt-task-row"></div>
       <div className="gantt-task-row"></div>
       {tasks &&
-    tasks.map((tsk, i) => (
-      <div key={`${i}-${tsk?.id}-${tsk.name}`} className="gantt-task-row">
-        <input data-task-id={tsk?.id} value={tsk?.name} onChange={(e) => onChange(e, i)} ref={(el) => (inputRef.current[i] = el)}/>
-        <button type="button" data-task-id={tsk?.id} onClick={handleDelete}>
-          x
-        </button>
-      </div>
-    ))}
+        tasks.map((tsk, i) => (
+          <div key={`${i}-${tsk?.id}-${tsk.name}`} className="gantt-task-row">
+            <input
+              data-task-id={tsk?.id}
+              value={tsk?.name}
+              onChange={(e) => onChange(e, i)}
+              ref={(el) => (inputRef.current[i] = el)}
+            />
+            <button type="button" data-task-id={tsk?.id} onClick={handleDelete}>
+              x
+            </button>
+          </div>
+        ))}
 
       <style jsx>{`
         #gantt-grid-container__tasks {

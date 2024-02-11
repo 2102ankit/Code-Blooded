@@ -1,8 +1,8 @@
-import { months } from '../gantt-chart-nextjs-starter/constants';
+import { months } from "../gantt-chart-nextjs-starter/constants";
 
 export default function TimeRange({ timeRange, setTimeRange }) {
   // add date selector values
-  let monthsOptions = [];
+  const monthsOptions = [];
   for (let i = 0; i < months.length; i++) {
     monthsOptions.push(
       <option key={i} value={i}>
@@ -22,33 +22,33 @@ export default function TimeRange({ timeRange, setTimeRange }) {
 
   function onChange(e) {
     const { value, id } = e.target;
-    if (id === 'from-select-month') {
+    if (id === "from-select-month") {
       setTimeRange((prevState) => {
         return { ...prevState, fromSelectMonth: value };
       });
     }
-    if (id === 'from-select-year') {
+    if (id === "from-select-year") {
       setTimeRange((prevState) => {
         return { ...prevState, fromSelectYear: value };
       });
     }
-    if (id === 'to-select-month') {
+    if (id === "to-select-month") {
       setTimeRange((prevState) => {
         return { ...prevState, toSelectMonth: value };
       });
     }
-    if (id === 'to-select-year') {
+    if (id === "to-select-year") {
       setTimeRange((prevState) => {
         return { ...prevState, toSelectYear: value };
       });
-    } 
+    }
   }
 
   return (
     <div id="time-range__container">
       <h2>Tracker Period</h2>
       <div id="time-range">
-        <fieldset id="select-from" style={{ paddingLeft: '0px' }}>
+        <fieldset id="select-from" style={{ paddingLeft: "0px" }}>
           <legend>From</legend>
           <select
             id="from-select-month"
@@ -63,7 +63,7 @@ export default function TimeRange({ timeRange, setTimeRange }) {
             name="from-select-year"
             value={timeRange.fromSelectYear}
             onChange={onChange}
-            style={{ marginLeft: '5px' }}
+            style={{ marginLeft: "5px" }}
           >
             {yearsOptions}
           </select>
@@ -84,7 +84,7 @@ export default function TimeRange({ timeRange, setTimeRange }) {
             name="to-select-year"
             value={timeRange.toSelectYear}
             onChange={onChange}
-            style={{ marginLeft: '5px' }}
+            style={{ marginLeft: "5px" }}
           >
             {yearsOptions}
           </select>

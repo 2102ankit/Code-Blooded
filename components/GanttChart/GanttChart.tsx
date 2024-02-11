@@ -1,57 +1,59 @@
-import { useEffect, useState} from 'react';
-import { client } from '../../utils/fetchWrapper';
-import AddTaskDuration from './AddTaskDuration';
-import AddTask from './AddTask';
-import Grid from './Grid';
-import Settings from './Settings';
-import Tasks from './Tasks';
-import TimeRange from './TimeRange';
-import TimeTable from './TimeTable';
+import { useEffect, useState } from "react";
+import { client } from "../../utils/fetchWrapper";
+import AddTaskDuration from "./AddTaskDuration";
+import AddTask from "./AddTask";
+import Grid from "./Grid";
+import Settings from "./Settings";
+import Tasks from "./Tasks";
+import TimeRange from "./TimeRange";
+import TimeTable from "./TimeTable";
 
 export default function GanttChart() {
-
-  const [tasks, setTasks] = useState([]);
-  const [taskDurations, setTaskDurations] = useState([]);
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem("tasks")) || []
+  );
+  const [taskDurations, setTaskDurations] = useState(
+    JSON.parse(localStorage.getItem("taskDurations")) || []
+  );
   const [timeRange, setTimeRange] = useState({
     fromSelectMonth: 0,
-    fromSelectYear: '2022',
+    fromSelectYear: "2022",
     toSelectMonth: 1,
-    toSelectYear: '2022',
+    toSelectYear: "2022",
   });
 
   useEffect(() => {
-    client('data.json').then(
+    client("data.json").then(
       (data) => {
         setTasks(data?.tasks);
         setTaskDurations(data?.taskDurations);
       },
       (error) => {
-        console.error('Error: ', error);
+        console.error("Error: ", error);
       }
     );
   }, []);
 
   return (
     <div id="gantt-container">
-      
-  <Grid>
-    <Tasks
-      tasks={tasks}
-      setTasks={setTasks}
-      setTaskDurations={setTaskDurations}
-    />
-    <TimeTable
-      timeRange={timeRange}
-      tasks={tasks}
-      taskDurations={taskDurations}
-      setTaskDurations={setTaskDurations}
-    />
-  </Grid>
-  <Settings>
-    <AddTask setTasks={setTasks} />
-    <AddTaskDuration tasks={tasks} setTaskDurations={setTaskDurations} />
-    <TimeRange timeRange={timeRange} setTimeRange={setTimeRange} />
-  </Settings>
+      <Grid>
+        <Tasks
+          tasks={tasks}
+          setTasks={setTasks}
+          setTaskDurations={setTaskDurations}
+        />
+        <TimeTable
+          timeRange={timeRange}
+          tasks={tasks}
+          taskDurations={taskDurations}
+          setTaskDurations={setTaskDurations}
+        />
+      </Grid>
+      <Settings>
+        <AddTask setTasks={setTasks} />
+        <AddTaskDuration tasks={tasks} setTaskDurations={setTaskDurations} />
+        <TimeRange timeRange={timeRange} setTimeRange={setTimeRange} />
+      </Settings>
       <style jsx>{`
         #gantt-container {
           --color-text: #272a2e;

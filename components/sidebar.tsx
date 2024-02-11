@@ -75,7 +75,7 @@ const Sidebar: React.FC = () => {
   //   },
   // ];
   return (
-    <div className="flex h-full w-64 flex-col gap-y-0 bg-gray-50 p-3 shadow-inner">
+    <div className="sticky left-0 top-0 flex h-full w-64 flex-col gap-y-0 bg-gray-50 p-3 shadow-inner">
       <div className="px-auto my-5 flex items-center gap-x-3">
         {/* <div className="mt-1 flex items-center justify-center rounded-sm bg-[#FF5630] p-1 text-xs font-bold text-white">
           <FaChessPawn className="aspect-square text-2xl" />

@@ -1,27 +1,27 @@
-import { useState } from 'react';
-import AddButton from './AddButton';
+import { useState } from "react";
+import AddButton from "./AddButton";
 
-export default function AddTaskDuration({tasks, setTaskDurations}) {
-  const [task, setTask] = useState('');
-  const [startDate, setStartDate] = useState('2022-01-01');
-  const [endDate, setEndDate] = useState('2022-01-03');
+export default function AddTaskDuration({ tasks, setTaskDurations }) {
+  const [task, setTask] = useState("");
+  const [startDate, setStartDate] = useState("2022-01-01");
+  const [endDate, setEndDate] = useState("2022-01-03");
 
   function onChange(e) {
     const { value, id } = e.target;
 
-    if (id === 'select-task') {
+    if (id === "select-task") {
       setTask(value);
     }
-    if (id === 'start-date') {
+    if (id === "start-date") {
       setStartDate(value);
     }
-    if (id === 'end-date') {
+    if (id === "end-date") {
       setEndDate(value);
     }
   }
 
   function handleSubmit(e) {
-    if (task === '') return;
+    if (task === "") return;
     const timeStamp = Date.now();
     const newTaskDuration = {
       id: timeStamp,
@@ -29,9 +29,13 @@ export default function AddTaskDuration({tasks, setTaskDurations}) {
       end: endDate,
       task: parseInt(task),
     };
-  
+
     setTaskDurations((prevState) => {
       const newState = prevState;
+      localStorage.setItem(
+        "taskDurations",
+        JSON.stringify([...newState, newTaskDuration])
+      );
       return [...newState, newTaskDuration];
     });
     e.preventDefault();
@@ -41,7 +45,7 @@ export default function AddTaskDuration({tasks, setTaskDurations}) {
     <form id="add-task-duration" onSubmit={handleSubmit}>
       <h2>Add Task Duration</h2>
       <div className="inner-form-container">
-        <fieldset id="task" style={{ paddingLeft: '0px' }}>
+        <fieldset id="task" style={{ paddingLeft: "0px" }}>
           <label htmlFor="select-task">Which task?</label>
           <select
             id="select-task"
@@ -50,13 +54,14 @@ export default function AddTaskDuration({tasks, setTaskDurations}) {
             value={task}
           >
             <option disabled defaultValue value="">
-                select a task
+              select a task
             </option>
-            {tasks && tasks.map((tsk) => (
-              <option key={tsk?.id} value={tsk?.id}>
-                {tsk?.name}
-              </option>
-            ))}
+            {tasks &&
+              tasks.map((tsk) => (
+                <option key={tsk?.id} value={tsk?.id}>
+                  {tsk?.name}
+                </option>
+              ))}
           </select>
         </fieldset>
         <fieldset id="date">
@@ -72,7 +77,7 @@ export default function AddTaskDuration({tasks, setTaskDurations}) {
               onChange={onChange}
             />
           </div>
-          <div className="fieldset-container" style={{ marginLeft: '10px' }}>
+          <div className="fieldset-container" style={{ marginLeft: "10px" }}>
             <label htmlFor="end-date">End date:</label>
             <input
               type="date"
@@ -113,7 +118,7 @@ export default function AddTaskDuration({tasks, setTaskDurations}) {
           margin-right: 10px;
         }
 
-        input[type='date'] {
+        input[type="date"] {
           padding: 10px 5px;
         }
       `}</style>

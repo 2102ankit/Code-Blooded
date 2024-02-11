@@ -2,7 +2,7 @@ import { useUser } from "@clerk/nextjs";
 import { FaChevronUp, FaPencilAlt } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { IssueType } from "@/utils/types"; // Changed from 'type' to 'IssueType'
+import { type IssueType } from "@/utils/types"; // Changed from 'type' to 'IssueType'
 import {
   Accordion,
   AccordionContent,
@@ -138,7 +138,7 @@ const IssueDetailsInfoAccordion: React.FC<{ issue: IssueType }> = ({
             <span className="text-sm font-semibold text-gray-600">
               {"Story Points "}
             </span>
-            <span className="max-w-4 ml-2 flex bg-red-500">
+            <span className="max-w-4 ml-2 flex ">
               {/* {storyPoints} */}
               <input
                 className="max-w-xs outline-none"

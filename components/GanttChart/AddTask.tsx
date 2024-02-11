@@ -1,12 +1,11 @@
-import { useState, useRef } from 'react';
-import AddButton from './AddButton';
+import { useState, useRef } from "react";
+import AddButton from "./AddButton";
 
-export default function AddTask({setTasks}) {
-  const [task, setTask] = useState('');
+export default function AddTask({ setTasks }) {
+  const [task, setTask] = useState("");
   const inputRef = useRef(null);
 
   function onChange(e, i) {
-    
     setTask(e.target.value);
   }
 
@@ -22,11 +21,12 @@ export default function AddTask({setTasks}) {
         name: task,
       };
       // Add the new task to the tasks array
+      localStorage.setItem("tasks", JSON.stringify([...prevState, newTask]));
       return [...prevState, newTask];
     });
 
     // Clear the input field after adding task
-    setTask('');
+    setTask("");
     // Focus on the input field for the next task
     inputRef.current.focus();
   }
@@ -34,7 +34,12 @@ export default function AddTask({setTasks}) {
   return (
     <form id="add-task" onSubmit={handleSubmit}>
       <h2>Add Task</h2>
-      <input value={task} onChange={onChange} placeholder="add task name" ref={inputRef} />
+      <input
+        value={task}
+        onChange={onChange}
+        placeholder="add task name"
+        ref={inputRef}
+      />
       <AddButton />
       <style jsx>{`
         #add-task {
