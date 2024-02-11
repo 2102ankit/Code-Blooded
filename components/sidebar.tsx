@@ -2,7 +2,18 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { backlogIcon, BoardIcon, DevelopmentIcon, RoadmapIcon } from "./svgs";
+import {
+  backlogIcon,
+  BoardIcon,
+  DevelopmentIcon,
+  RoadmapIcon,
+  // DashboardIcon,
+} from "./svgs";
+import { MdOutlineDashboard } from "react-icons/md";
+import { MdOutlineRoute } from "react-icons/md";
+import { MdOutlinePendingActions } from "react-icons/md";
+import { FaClipboardList } from "react-icons/fa";
+import { VscGraph } from "react-icons/vsc";
 import {
   NavigationMenu,
   NavigationMenuLink,
@@ -11,6 +22,7 @@ import {
 import { usePathname } from "next/navigation";
 import { FaChessPawn, FaChevronRight } from "react-icons/fa";
 import { useProject } from "@/hooks/query-hooks/use-project";
+// import { d } from "../assets/readme/d.svg";
 
 type NavItemType = {
   id: string;
@@ -23,22 +35,34 @@ const Sidebar: React.FC = () => {
   const { project } = useProject();
   const planningItems = [
     {
+      id: "dashboard",
+      label: "Dashboard",
+      icon: MdOutlineDashboard,
+      href: `/project/dashboard`,
+    },
+    {
       id: "roadmap",
       label: "Roadmap",
-      icon: RoadmapIcon,
+      icon: MdOutlineRoute,
       href: `/project/roadmap`,
     },
     {
       id: "backlog",
       label: "Backlog",
-      icon: backlogIcon,
+      icon: MdOutlinePendingActions,
       href: `/project/backlog`,
     },
     {
       id: "board",
       label: "Board",
-      icon: BoardIcon,
+      icon: FaClipboardList,
       href: `/project/board`,
+    },
+    {
+      id: "board",
+      label: "Graphs",
+      icon: VscGraph,
+      href: `/project/graphs`,
     },
   ];
 
@@ -66,10 +90,9 @@ const Sidebar: React.FC = () => {
       {/* <NavList label={"PLANNING"} items={planningItems} /> */}
 
       <h2 className="mb-4">PLANNING</h2>
-      
-      { 
-        planningItems.map((item,idx)=>{
-          const currentPath = usePathname();
+
+      {planningItems.map((item, idx) => {
+        const currentPath = usePathname();
 
         if (currentPath === item.href) {
           return (

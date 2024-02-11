@@ -7,7 +7,12 @@ const Dashboard = async () => {
       <div className="container mx-auto px-4">
         <h1 className="mx-auto my-8 text-3xl font-bold">Dashboard</h1>
         <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
-          <Link href="/openSRS">View SRS</Link>
+          <a
+            href="https://docs.google.com/spreadsheets/d/1uj9alWCcZd49LF9AC4Za3mUoPPKzgTpqyBsS0c6jeAw/edit#gid=274562713"
+            target="_blank"
+          >
+            View Analytics
+          </a>
         </button>
         <div className="my-8 grid grid-cols-2 gap-x-6">
           <div className="my-3 flex items-center justify-center bg-gradient-to-r from-cyan-500 to-blue-500 text-lg text-white">
@@ -33,7 +38,7 @@ const Dashboard = async () => {
           </div>
           <div className="my-3 flex items-center justify-center bg-gradient-to-r from-fuchsia-500 to-violet-500 text-lg text-white">
             <Link
-              href="/project/charts"
+              href="/project/graphs"
               className="p-20 text-lg font-semibold "
             >
               Charts
@@ -41,7 +46,7 @@ const Dashboard = async () => {
           </div>
         </div>
       </div>
-      <RightBar />
+      {/* <RightBar /> */}
     </div>
   );
 };
