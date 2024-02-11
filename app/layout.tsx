@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "Clerk",
     "TanStack",
   ],
-  creator: "Sebastian Fernandez",
+  creator: "",
   openGraph: {
     type: "website",
     locale: "en_IN",

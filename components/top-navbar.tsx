@@ -26,7 +26,7 @@ const TopNavbar: React.FC = () => {
         </a>
 
         {/* <Button
-          href="https://github.com/sebastianfdz/jira_clone"
+
           target="_blank"
           className="ml-3 flex gap-x-2"
         >
